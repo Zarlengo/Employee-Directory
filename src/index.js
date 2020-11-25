@@ -3,13 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-const db = require('./models');
-require('./seeders/seedDB')(db);
+const db = require('./data');
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App { ...db } />
   </React.StrictMode>,
   document.getElementById('root')
 );
