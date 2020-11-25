@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import Modal from 'react-modal';
 import './style.css';
 import TableRow from '../tableRow';
+import Filter from '../filter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp, faArrowDown, faArrowsAltV } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp, faArrowDown, faArrowsAltV, faFilter } from '@fortawesome/free-solid-svg-icons';
+
+Modal.setAppElement('#root');
 
 function Table(db){
     const [ sortCol, setSortCol ] = useState('lastName');
@@ -16,6 +20,12 @@ function Table(db){
     const [ showDepartment, setShowDepartment ] = useState(false);
     const [ showManager, setShowManager ] = useState(false);
     const [ arrow, setArrow ] = useState(faArrowDown);
+    const [ isOpen, setIsOpen ] = useState(false);
+    const [ filterLoc, setFilterLoc ] = useState('');
+
+    const toggleModal = () => {
+        setIsOpen(!isOpen);
+    }
 
     if ( sortAsc ) {
         db.default.sort((a, b) => (a[sortCol] > b[sortCol]) ? 1 : -1);
@@ -48,81 +58,86 @@ function Table(db){
         setShowManager(false);
     }
 
+    const headClickHandler = (event, thId, setCol) => {
+        event.preventDefault();
+        changeDirection(thId);
+        setSortCol(thId);
+        hideArrows();
+        setCol(true);
+    }
+
+    const filter = (event, thId) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setFilterLoc(thId);
+        toggleModal();
+    }
+
+    const filterClickHandler = (targetId) => {
+        console.log({targetId: targetId});
+
+    }
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th onClick={() => { 
-                            changeDirection('lastName');
-                            setSortCol('lastName');
-                            hideArrows();
-                            setShowLast(true);
-                            }
-                        }>Last Name&nbsp;
-                            <FontAwesomeIcon icon={showLast ? arrow : faArrowsAltV} />
-                    </th>
-                    <th onClick={() => { 
-                            changeDirection('name');
-                            setSortCol('name');
-                            hideArrows();
-                            setShowFirst(true);
-                            }
-                        }>Preferred First Name (Legal Name)&nbsp;
-                            <FontAwesomeIcon icon={showFirst ? arrow : faArrowsAltV} />
-                    </th>
-                    <th onClick={() => { 
-                            changeDirection('ext');
-                            setSortCol('ext');
-                            hideArrows();
-                            setShowExt(true);
-                            }
-                        }>Extension&nbsp;
-                            <FontAwesomeIcon icon={showExt ? arrow : faArrowsAltV} />
-                    </th>
-                    <th onClick={() => { 
-                            changeDirection('title');
-                            setSortCol('title');
-                            hideArrows();
-                            setShowTitle(true);
-                            }
-                        }>Job Title&nbsp;
-                            <FontAwesomeIcon icon={showTitle ? arrow : faArrowsAltV} />
-                    </th>
-                    <th onClick={() => { 
-                            changeDirection('email');
-                            setSortCol('email');
-                            hideArrows();
-                            setShowEmail(true);
-                            }
-                        }>Email&nbsp;
-                            <FontAwesomeIcon icon={showEmail ? arrow : faArrowsAltV} />
-                    </th>
-                    <th onClick={() => { 
-                            changeDirection('department');
-                            setSortCol('department');
-                            hideArrows();
-                            setShowDepartment(true);
-                            }
-                        }>Department&nbsp;
-                            <FontAwesomeIcon icon={showDepartment ? arrow : faArrowsAltV} />
-                    </th>
-                    <th onClick={() => { 
-                            changeDirection('manager');
-                            setSortCol('manager');
-                            hideArrows();
-                            setShowManager(true);
-                            }
-                        }>Manager&nbsp;
-                            <FontAwesomeIcon icon={showManager ? arrow : faArrowsAltV} />
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                {db.default.map(row => {
-                    return(<TableRow key={ 'data-' + row.id } data={ row }/>);
-                })}
-            </tbody>
-        </table>
+        <div>
+            <Modal
+                isOpen={isOpen}
+                onRequestClose={toggleModal}
+                contentLabel='Filter'
+            >
+                <div>Filter</div>
+                <button onClick={toggleModal}>Close</button>
+                <Filter filterClickHandler={ filterClickHandler } />
+            </Modal>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-id='lastName' onClick={(event) => headClickHandler(event, 'lastName', setShowLast)}>
+                            Last Name&nbsp;
+                            <FontAwesomeIcon icon={ showLast ? arrow : faArrowsAltV } />&nbsp;
+                            <FontAwesomeIcon 
+                                icon={ faFilter } 
+                                onClick={(event) => filter(event, 'lastName')}
+                            />
+                        </th>
+                        <th data-id='name' onClick={(event) => headClickHandler(event, 'name', setShowFirst)}>
+                            Preferred First Name (Legal Name)&nbsp;
+                            <FontAwesomeIcon icon={ showFirst ? arrow : faArrowsAltV } />&nbsp;
+                            <FontAwesomeIcon icon={ faFilter } onClick={(event) => filter(event, 'name')} />
+                        </th>
+                        <th data-id='ext' onClick={(event) => headClickHandler(event, 'ext', setShowExt)}>
+                            Extension&nbsp;
+                            <FontAwesomeIcon icon={ showExt ? arrow : faArrowsAltV } />&nbsp;
+                            <FontAwesomeIcon icon={ faFilter } onClick={(event) => filter(event, 'ext')} />
+                        </th>
+                        <th data-id='title' onClick={(event) => headClickHandler(event, 'title', setShowTitle)}>
+                            Job Title&nbsp;
+                            <FontAwesomeIcon icon={ showTitle ? arrow : faArrowsAltV } />&nbsp;
+                            <FontAwesomeIcon icon={ faFilter } onClick={(event) => filter(event, 'title')} />
+                        </th>
+                        <th data-id='email' onClick={(event) => headClickHandler(event, 'email', setShowEmail)}>
+                            Email&nbsp;
+                            <FontAwesomeIcon icon={ showEmail ? arrow : faArrowsAltV } />&nbsp;
+                            <FontAwesomeIcon icon={ faFilter } onClick={(event) => filter(event, 'email')} />
+                        </th>
+                        <th data-id='department' onClick={(event) => headClickHandler(event, 'department', setShowDepartment)}>
+                            Department&nbsp;
+                            <FontAwesomeIcon icon={ showDepartment ? arrow : faArrowsAltV } />&nbsp;
+                            <FontAwesomeIcon icon={ faFilter } onClick={(event) => filter(event, 'department')} />
+                        </th>
+                        <th data-id='manager' onClick={(event) => headClickHandler(event, 'manager', setShowManager)}>
+                            Manager&nbsp;
+                            <FontAwesomeIcon icon={ showManager ? arrow : faArrowsAltV } />&nbsp;
+                            <FontAwesomeIcon icon={ faFilter } onClick={(event) => filter(event, 'manager')} />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {db.default.map(row => {
+                        return(<TableRow key={ 'data-' + row.id } data={ row }/>);
+                    })}
+                </tbody>
+            </table>
+        </div>
     );
 }
 
