@@ -8,7 +8,7 @@ import { faArrowUp, faArrowDown, faArrowsAltV, faFilter } from '@fortawesome/fre
 
 Modal.setAppElement('#root');
 
-function Table(db){
+function Table(data){
     const [ sortCol, setSortCol ] = useState('lastName');
     const [ sortAsc, setSortAsc ] = useState(true);
 
@@ -22,15 +22,41 @@ function Table(db){
     const [ arrow, setArrow ] = useState(faArrowDown);
     const [ isOpen, setIsOpen ] = useState(false);
     const [ filterLoc, setFilterLoc ] = useState('');
+    const [ filterMode, setFilterMode ] = useState('none');
+    const [ filterString, setFilterString ] = useState('A');
 
     const toggleModal = () => {
         setIsOpen(!isOpen);
     }
 
+    let db = data.default;
+    switch (filterMode) {
+        case 'none':
+        default:
+            break;
+        case 'filterStart':
+            db = db.filter((element) => element[filterLoc].substring(0, filterString.length).toUpperCase() === filterString.toUpperCase());
+            break;
+        case 'filterEnd':
+            break;
+        case 'filterContain':
+            break;
+        case 'filter!Contain':
+            break;
+        case 'filter=':
+            break;
+        case 'filter!=':
+            break;
+        case 'filterList':
+            break;
+    }
+
+    console.log({'db': db});
+
     if ( sortAsc ) {
-        db.default.sort((a, b) => (a[sortCol] > b[sortCol]) ? 1 : -1);
+        db.sort((a, b) => (a[sortCol] > b[sortCol]) ? 1 : -1);
     } else {
-        db.default.sort((a, b) => (a[sortCol] < b[sortCol]) ? 1 : -1);
+        db.sort((a, b) => (a[sortCol] < b[sortCol]) ? 1 : -1);
     }
 
     const changeDirection = (currentCol) =>{
@@ -74,7 +100,9 @@ function Table(db){
     }
 
     const filterClickHandler = (targetId) => {
-        console.log({targetId: targetId});
+        toggleModal();
+        console.log(filterLoc);
+        console.log(targetId);
 
     }
     return (
@@ -84,9 +112,15 @@ function Table(db){
                 onRequestClose={toggleModal}
                 contentLabel='Filter'
             >
-                <div>Filter</div>
                 <button onClick={toggleModal}>Close</button>
-                <Filter filterClickHandler={ filterClickHandler } />
+                <Filter
+                    filterMode={ filterMode }
+                    setFilterMode={ setFilterMode }
+                    toggleModal = { toggleModal }
+                    filterString = { filterString }
+                    setFilterString = { setFilterString }
+                />
+                <button onClick={toggleModal}>Close</button>
             </Modal>
             <table>
                 <thead>
@@ -132,7 +166,7 @@ function Table(db){
                     </tr>
                 </thead>
                 <tbody>
-                    {db.default.map(row => {
+                    {db.map(row => {
                         return(<TableRow key={ 'data-' + row.id } data={ row }/>);
                     })}
                 </tbody>
