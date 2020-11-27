@@ -34,7 +34,8 @@ function Table(data){
           right                 : 'auto',
           bottom                : 'auto',
         }
-      };
+    };
+
     let w = window.innerWidth;
     if ( modalLeft + 300 > w) {
         setModalLeft(w - 300);
@@ -129,12 +130,6 @@ function Table(data){
         toggleModal(event);
     }
 
-    const filterClickHandler = (targetId) => {
-        toggleModal();
-        console.log(filterLoc);
-        console.log(targetId);
-
-    }
     return (
         <div>
             <Modal
