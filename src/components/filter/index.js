@@ -79,17 +79,6 @@ export default function Filter({ setFilterMode, filterMode, toggleModal, setFilt
                     onKeyDown={(event) => { if (event.key === 'Enter') {toggleModal()}}}
                 /> : <div /> }
             </li>
-            <li data-id="filterList" onClick={(event) => filterClick(event)}>
-                <FontAwesomeIcon icon={ faFilter } />&nbsp;
-                filter: <b>in a list</b>&nbsp;
-                { filterMode === 'filterList' ? 
-                <input
-                    type="text"
-                    value={ filterString }
-                    onChange={(event) => { setFilterString(event.target.value) }}
-                    onKeyDown={(event) => { if (event.key === 'Enter') {toggleModal()}}}
-                /> : <div /> }
-            </li>
         </ul>
     );
 }
