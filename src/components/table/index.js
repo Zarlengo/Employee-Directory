@@ -81,8 +81,6 @@ function Table(data){
             break;
     }
 
-    console.log({'db': db});
-
     if ( sortAsc ) {
         db.sort((a, b) => (a[sortCol] > b[sortCol]) ? 1 : -1);
     } else {
