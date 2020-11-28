@@ -56,7 +56,6 @@ function Table(data){
         toggleModal();
     } 
 
-    console.log({'filterLoc': filterLoc});
     let db = data.default;
     switch (filterMode) {
         case 'none':
