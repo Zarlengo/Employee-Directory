@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+# Employee Directory
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Live Site - https://zar-workout.herokuapp.com/](https://zar-workout.herokuapp.com/)
 
-## Available Scripts
+## Description
+A React app to display non-sensitive employee information to an organization.
 
-In the project directory, you can run:
+![Welcome](./images/Hero.jpg)
 
-### `npm start`
+## Table of Contents
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. [Installation](#1-installation)
+2. [Usage](#2-usage)
+3. [License](#3-license)
+4. [Contributing](#4-contributing)
+6. [Questions](#5-questions)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 1 Installation
+1. Download repository
+	```
+	HTTPS: Git clone https://github.com/Zarlengo/Employee-Directory.git
+    SSH: Git clone git@github.com:Zarlengo/Employee-Directory.git
+	```
 
-### `npm test`
+2. Install dependencies
+	```
+	npm install
+	```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Start the server
+    ```
+    npm run start
+    ```
 
-### `npm run build`
+4. Navigate to localhost:3000
+    You can now view employee_directory in the browser.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    [Local:            http://localhost:3000/Employee-Directory](http://localhost:3000)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. To use the site without a node server. Creates a build folder with html/css/js files
+    ```
+    npm run build
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 2 Usage
 
-### `npm run eject`
+![Welcome](./images/Hero.jpg)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Sorting
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Sorted](./images/SortedEmployee.jpg)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Each column can be sorted in ascending or in descending order by clicking the arrow in the column header. The arrow indicates the current column being sorted and the direction of the arrow shows which direction the column is sorted (Down - Ascending, Up - Descending, Up & Down - Not Sorted).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+#### Filtering
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Each column can be filtered by clicking on the filter icon in the column header. A green colored filter icon indicates that the column currently has a filter applied to it. Clicking on the filter icon will bring up the filter menu.
 
-### Code Splitting
+![Filtered](./images/FilteredEmployees.jpg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* Starts with
+* Ends with
+* Contains
+* Does not contain
+* Equals
+* Does not equal
 
-### Analyzing the Bundle Size
+![Filter Initial](./images/FilterInitial.jpg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Clicking a desired filter mode will show an input field to allow the user to enter the filtering condition.
 
-### Making a Progressive Web App
+![Filter Final](./images/FilterFinal.jpg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+* Reset - removes any filters from the directory
+* Filter - applies current filter criteria to the directory
+* X - closes the filter windows (maintains current filter)
+* Clicking outside of the modal will close the filter window (maintains the current filter)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 3 License
+    Copyright © 2020 Chris Zarlengo
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted, provided that the above
+    copyright notice and this permission notice appear in all copies.
 
-### Deployment
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+    WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+    MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+    SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+    WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION
+    OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+    CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 4 Contributing
+* [Zarlengo](https://github.com/Zarlengo)
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 5 Questions
+* [Github Profile for Zarlengo](https://github.com/Zarlengo)
+* [Send email to christopher@zarlengo.net](mailto:christopher@zarlengo.net)
+* [File an issue](https://github.com/Zarlengo/Employee-Directory/issues)
