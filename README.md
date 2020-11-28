@@ -1,7 +1,7 @@
 # Employee Directory
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
-[Live Site - https://zar-workout.herokuapp.com/](https://zar-workout.herokuapp.com/)
+[Live Site - https://zarlengo.github.io/Employee-Directory/index.html](https://zarlengo.github.io/Employee-Directory/index.html)
 
 ## Description
 A React app to display non-sensitive employee information to an organization.
