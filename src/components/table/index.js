@@ -37,8 +37,8 @@ function Table(data){
     };
 
     let w = window.innerWidth;
-    if ( modalLeft + 300 > w) {
-        setModalLeft(w - 300);
+    if ( modalLeft + 430 > w) {
+        setModalLeft(w - 430);
     }
 
     const toggleModal = (event) => {
@@ -68,16 +68,16 @@ function Table(data){
             db = db.filter((element) => element[filterLoc] === null ? false : element[filterLoc].toString().substring(element[filterLoc].toString().length - filterString.length).toUpperCase() === filterString.toUpperCase());
             break;
         case 'filterContain':
-            db = db.filter((element) => element[filterLoc].toString().toUpperCase().includes(filterString.toUpperCase()));
+            db = db.filter((element) => element[filterLoc] === null ? false : element[filterLoc].toString().toUpperCase().includes(filterString.toUpperCase()));
             break;
         case 'filter!Contain':
-            db = db.filter((element) => !element[filterLoc].toString().toUpperCase().includes(filterString.toUpperCase()));
+            db = db.filter((element) => element[filterLoc] === null ? false : !element[filterLoc].toString().toUpperCase().includes(filterString.toUpperCase()));
             break;
         case 'filter=':
-            db = db.filter((element) => element[filterLoc].toString().toUpperCase() === filterString.toUpperCase());
+            db = db.filter((element) => element[filterLoc] === null ? false : element[filterLoc].toString().toUpperCase() === filterString.toUpperCase());
             break;
         case 'filter!=':
-            db = db.filter((element) => element[filterLoc].toString().toUpperCase() !== filterString.toUpperCase());
+            db = db.filter((element) => element[filterLoc] === null ? false : element[filterLoc].toString().toUpperCase() !== filterString.toUpperCase());
             break;
     }
 
@@ -134,6 +134,7 @@ function Table(data){
                 isOpen={isOpen}
                 onRequestClose={toggleModal}
                 contentLabel='Filter'
+                id='filterModal'
             >
                 <FontAwesomeIcon icon={ faWindowClose } onClick={toggleModal} />
                 <Filter
@@ -143,7 +144,10 @@ function Table(data){
                     filterString = { filterString }
                     setFilterString = { setFilterString }
                 />
-                <button onClick={resetModal}>Reset</button>
+                <div class='btn-group'>
+                    <button class='modalBtn resetBtn' onClick={resetModal}>Reset</button>
+                    <button class='modalBtn filterBtn' onClick={toggleModal}>Filter</button>
+                </div>
             </Modal>
             <table>
                 <thead>

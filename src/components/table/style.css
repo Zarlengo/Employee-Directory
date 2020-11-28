@@ -5,3 +5,43 @@ table, tr, td, th {
 .fa-filter.active{
     color: limegreen;
 }
+
+.fa-window-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+}
+
+ul {
+    padding-inline-start: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+#filterModal {
+    width: 375px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.resetBtn {
+    background-color: rgb(202, 77, 77);
+}
+
+.filterBtn {
+    background-color: rgb(56, 165, 5);
+}
+
+.modalBtn {
+    padding: 5px 15px;
+    font-size: medium;
+    color: white;
+    border-radius: 10%;
+    outline: none;
+}
